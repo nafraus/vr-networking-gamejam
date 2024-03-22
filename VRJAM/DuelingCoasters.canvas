@@ -1,0 +1,12 @@
+{
+	"nodes":[
+		{"id":"a77254230dfa0cb0","type":"text","text":"## Dueling Coasters\n- [Epic Universe Dueling Roller Coaster POV - Racing Coaster Opening 2025 (youtube.com)](https://www.youtube.com/watch?v=_otNigPNMu8)","x":-300,"y":-30,"width":600,"height":190},
+		{"id":"54d22694cb32ac26","type":"file","file":"Images/RacingPSghettiBowl6Flags.jpg","x":-308,"y":-441,"width":400,"height":225},
+		{"id":"21372fc1dac99e54","type":"file","file":"Images/DuelingSlide.jpg","x":-718,"y":125,"width":400,"height":225},
+		{"id":"4f6ffc2794ae80cd","type":"file","file":"Images/DuelingDragonsUSIoAFlorida.jpg","x":322,"y":-307,"width":400,"height":257},
+		{"id":"9f77748cedd2e6f1","type":"file","file":"Images/DuelingCoasterWIP.jpg","x":456,"y":203,"width":399,"height":189},
+		{"id":"97e3f03072d389bb","type":"file","file":"Images/DuelingCoastersRCT3.jpg","x":-840,"y":-366,"width":400,"height":300},
+		{"id":"8085ffeab64ebcaf","type":"file","file":"Images/SpikeDuelingCoaster.png","x":-200,"y":298,"width":400,"height":253}
+	],
+	"edges":[]
+}

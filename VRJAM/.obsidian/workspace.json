@@ -23,9 +23,24 @@
             "id": "d4c5e37ce232844e",
             "type": "leaf",
             "state": {
+              "type": "canvas",
+              "state": {
+                "file": "DuelingCoasters.canvas",
+                "viewState": {
+                  "x": -30.43636611037948,
+                  "y": 38.84709398984907,
+                  "zoom": -1
+                }
+              }
+            }
+          },
+          {
+            "id": "0e9c23ceff87b2ae",
+            "type": "leaf",
+            "state": {
               "type": "markdown",
               "state": {
-                "file": "To Do.md",
+                "file": "DesignChoices.md",
                 "mode": "source",
                 "source": false
               }
@@ -40,28 +55,14 @@
                 "file": "Visual Theme.canvas",
                 "viewState": {
                   "x": 0,
-                  "y": -376.9754972505568,
+                  "y": -116.59097107172,
                   "zoom": 0
                 }
               }
             }
           }
         ],
-        "currentTab": 2
-      },
-      {
-        "id": "d0dff386030c31af",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "98b9e7fa358388a6",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {}
-            }
-          }
-        ]
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -127,7 +128,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Visual Theme.canvas",
+                "file": "DuelingCoasters.canvas",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -144,7 +145,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Visual Theme.canvas",
+                "file": "DuelingCoasters.canvas",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -167,7 +168,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Visual Theme.canvas"
+                "file": "DuelingCoasters.canvas"
               }
             }
           }
@@ -188,10 +189,25 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "fe2e0a25eeb2b91f",
+  "active": "d4c5e37ce232844e",
   "lastOpenFiles": [
-    "To Do.md",
+    "Images/DuelingCoastersRCT3.jpg",
+    "DuelingCoasters.canvas",
+    "Images",
+    "Images/SpikeDuelingCoaster.png",
+    "SpikeDuelingCoaster.png.crdownload",
+    "Images/DuelingCoasterWIP.jpg",
+    "DuelingCoasterWIP.jpg.crdownload",
+    "Images/DuelingSlide.jpg",
+    "DuelingSlide.jpg.crdownload",
+    "Images/DuelingDragonsUSIoAFlorida.jpg",
+    "DuelingDragonsUSIoAFlorida.jpg.crdownload",
+    "Images/RacingPSghettiBowl6Flags.jpg",
+    "RacingPSghettiBowl6Flags.jpg.crdownload",
+    "DuelingCoastersRCT3.jpg.crdownload",
     "Register.md",
+    "DesignChoices.md",
+    "To Do.md",
     "Visual Theme.canvas",
     "Welcome.md"
   ]
