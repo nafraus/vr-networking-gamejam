@@ -23,24 +23,9 @@
             "id": "d4c5e37ce232844e",
             "type": "leaf",
             "state": {
-              "type": "canvas",
-              "state": {
-                "file": "DuelingCoasters.canvas",
-                "viewState": {
-                  "x": -30.43636611037948,
-                  "y": 38.84709398984907,
-                  "zoom": -1
-                }
-              }
-            }
-          },
-          {
-            "id": "0e9c23ceff87b2ae",
-            "type": "leaf",
-            "state": {
               "type": "markdown",
               "state": {
-                "file": "DesignChoices.md",
+                "file": "To Do.md",
                 "mode": "source",
                 "source": false
               }
@@ -55,14 +40,40 @@
                 "file": "Visual Theme.canvas",
                 "viewState": {
                   "x": 0,
-                  "y": -116.59097107172,
+                  "y": -376.9754972505568,
                   "zoom": 0
                 }
               }
             }
+          },
+          {
+            "id": "ef5cfcee600b1014",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Alien gun Brainstorming.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
+      },
+      {
+        "id": "d0dff386030c31af",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "98b9e7fa358388a6",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {}
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -128,7 +139,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "DuelingCoasters.canvas",
+                "file": "Alien gun Brainstorming.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -145,7 +156,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "DuelingCoasters.canvas",
+                "file": "Alien gun Brainstorming.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -168,7 +179,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "DuelingCoasters.canvas"
+                "file": "Alien gun Brainstorming.md"
               }
             }
           }
@@ -189,26 +200,22 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d4c5e37ce232844e",
+  "active": "ef5cfcee600b1014",
   "lastOpenFiles": [
-    "Images/DuelingCoastersRCT3.jpg",
-    "DuelingCoasters.canvas",
-    "Images",
     "Images/SpikeDuelingCoaster.png",
-    "SpikeDuelingCoaster.png.crdownload",
-    "Images/DuelingCoasterWIP.jpg",
-    "DuelingCoasterWIP.jpg.crdownload",
-    "Images/DuelingSlide.jpg",
-    "DuelingSlide.jpg.crdownload",
     "Images/DuelingDragonsUSIoAFlorida.jpg",
-    "DuelingDragonsUSIoAFlorida.jpg.crdownload",
+    "Images/DuelingCoasterWIP.jpg",
+    "Images/DuelingCoastersRCT3.jpg",
+    "Images/DuelingSlide.jpg",
     "Images/RacingPSghettiBowl6Flags.jpg",
-    "RacingPSghettiBowl6Flags.jpg.crdownload",
-    "DuelingCoastersRCT3.jpg.crdownload",
-    "Register.md",
+    "Images",
+    "DuelingCoasters.canvas",
     "DesignChoices.md",
-    "To Do.md",
     "Visual Theme.canvas",
+    "Alien gun Brainstorming.md",
+    "Untitled",
+    "To Do.md",
+    "Register.md",
     "Welcome.md"
   ]
 }
