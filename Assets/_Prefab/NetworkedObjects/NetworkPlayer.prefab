@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 3969022481791581009}
   - component: {fileID: 3972236878533016181}
   m_Layer: 0
-  m_Name: head
+  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -570,7 +570,7 @@ GameObject:
   - component: {fileID: 6992698523507243890}
   - component: {fileID: 5058830410193800570}
   m_Layer: 0
-  m_Name: LeftHandPrefab
+  m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1213,7 +1213,7 @@ GameObject:
   - component: {fileID: 980067251119120826}
   - component: {fileID: 7173333187662193402}
   m_Layer: 0
-  m_Name: RightHandPrefab
+  m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
