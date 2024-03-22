@@ -10,6 +10,7 @@ using Unity.Services.Relay.Models;
 using Unity.Netcode.Transports.UTP;
 using TMPro;
 using NaughtyAttributes;
+using UnityEngine.Events;
 
 public class NetworkConnect : MonoBehaviour
 {
