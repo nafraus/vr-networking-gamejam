@@ -16,6 +16,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private GunSettingsSO gun;
     [SerializeField] private Transform shootingOrigin;
     [SerializeField] private PlayerScore playerScore;
+    [SerializeField] private GameObject tracerPrefab;
     #endregion
 
     [Foldout("Events")][SerializeField] private UnityEvent OnFireEvent;
@@ -118,29 +119,30 @@ public class Gun : MonoBehaviour
         RaycastHit hit;
         Ray ray = new Ray(shootingOrigin.position,direction);
         Physics.Raycast(ray, out hit);
+        BulletTracer tracer = Instantiate(tracerPrefab).GetComponent<BulletTracer>();
 
-        //Prototype Laser
+        /*//Prototype Laser
         GameObject lineRend = new GameObject();
         LineRenderer line = lineRend.AddComponent<LineRenderer>();
         line.SetPosition(0, shootingOrigin.position);
         line.SetPosition(1, shootingOrigin.position + direction * 10);
-        line.SetWidth(0.005f, 0.005f);
-
-        StartCoroutine(DestroyGameObjectAfterSeconds(lineRend, 0.5f));
+        line.SetWidth(0.005f, 0.005f);*/
 
         //Look for target
-        NetworkTarget target = hit.collider.GetComponent<NetworkTarget>();
-        if (target)
+        if (hit.collider)
         {
-            target.SetPlayerScore(playerScore);
-            target.TargetHitServer();
+            NetworkTarget target = hit.collider.GetComponent<NetworkTarget>();
+            tracer.Init(shootingOrigin.position, hit.point);
+            if (target)
+            {
+                target.SetPlayerScore(playerScore);
+                target.TargetHitServer();
+            }
         }
-    }
-
-    IEnumerator DestroyGameObjectAfterSeconds(GameObject obj, float time)
-    {
-        yield return new WaitForSeconds(time);
-        Destroy(obj);
+        else
+        {
+            tracer.Init(shootingOrigin.position, shootingOrigin.position + direction * 25);
+        }
     }
 
     IEnumerator FireMultiple()
