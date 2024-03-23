@@ -15,11 +15,18 @@ public class NetworkTarget : NetworkBehaviour
     /// </summary>
     public void TargetHitServer()
     {
-        // Destroy self
-        NetworkObject.Despawn();
+        // Despawn
+        DespawnServerRpc();
 
         // Add score to score manager for the provided player
         playerScore.AddScoreServerRpc(score);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void DespawnServerRpc()
+    {
+        // Destroy self
+        NetworkObject.Despawn();
     }
 
     /// <summary>

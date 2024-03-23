@@ -39,7 +39,7 @@ tags:
 	1. [ ] Fix Burst
 	2. [ ] Tracers
 	3. [ ] Reload
-	4. [ ] Raycast uses hit target script
+	4. [x] Raycast uses hit target script
 2. [ ] Networked targets
 	1. [x] Confirm despawn
 	2. [!] Confirm spawns from scene for both clients
