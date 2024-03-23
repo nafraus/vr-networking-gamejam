@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 6622098264753475875}
   - component: {fileID: 7432615325541868032}
   - component: {fileID: 7440123221894630281}
+  - component: {fileID: 3630268811720046151}
   m_Layer: 0
   m_Name: SimpleGun
   m_TagString: Untagged
@@ -147,6 +148,28 @@ MonoBehaviour:
       m_Calls: []
   gun: {fileID: 11400000, guid: 300a4493ee9577a4ab2a69f38187f2fd, type: 2}
   shootingOrigin: {fileID: 4107912152316059645}
+  playerScore: {fileID: 0}
+--- !u!65 &3630268811720046151
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976359851450299076}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.938304, y: 3.159434, z: 2.9878817}
+  m_Center: {x: -0.09828007, y: 0.0055298186, z: 0.993941}
 --- !u!1 &2112399094630305028
 GameObject:
   m_ObjectHideFlags: 0

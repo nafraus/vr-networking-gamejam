@@ -13,11 +13,14 @@ public class Gun : MonoBehaviour
     #region Inspector Fields
     [SerializeField] private XRDirectInteractor interactor;
     [SerializeField] private InputActionProperty fireReference;
-    public UnityEvent OnFireEvent;
     [SerializeField] private GunSettingsSO gun;
     [SerializeField] private Transform shootingOrigin;
     [SerializeField] private PlayerScore playerScore;
     #endregion
+
+    [Foldout("Events")][SerializeField] private UnityEvent OnFireEvent;
+    [Foldout("Events")][SerializeField] private UnityEvent OnEmptyMagEvent;
+    [Foldout("Events")][SerializeField] private UnityEvent OnReloadEvent;
 
     //Effects Dictionary / List
 
@@ -88,7 +91,7 @@ public class Gun : MonoBehaviour
     void FireOnce()
     {
         Debug.Log("Shots fired");
-        interactor.SendHapticImpulse(0.85f, 0.1f);
+        interactor.SendHapticImpulse(0.85f, 0.25f);
         OnFireEvent.Invoke();
 
         if(gun.spreadStrength == 0) RaycastShot(transform.forward);
@@ -162,6 +165,7 @@ public class Gun : MonoBehaviour
 
     public void Reload()
     {
+        currentClipCount = 0;
         StartCoroutine(ReloadLoop());
     }
 
