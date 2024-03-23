@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using NaughtyAttributes;
 using System.Threading;
 using UnityEngine.XR.Interaction.Toolkit;
+using System;
 
 public class Gun : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private InputActionProperty fireReference;
     public UnityEvent OnFireEvent;
     [SerializeField] private GunSettingsSO gun;
+    [SerializeField] private Transform shootingOrigin;
     #endregion
 
     //Effects Dictionary / List
@@ -21,7 +23,7 @@ public class Gun : MonoBehaviour
     private int currentClipCount;
     private float timeSinceLastShot;
     private float timeSinceLastBurstShot;
-    private float isFireHeld;
+    private bool hasAlreadyFired = false;
 
     void Start()
     {
@@ -32,13 +34,34 @@ public class Gun : MonoBehaviour
     void Update()
     {
         timeSinceLastShot += Time.fixedDeltaTime;
-        float fireValue = fireReference.action.ReadValue<float>();
-        if (fireValue < gun.fireThreshhold) return;
+        bool actionHeld = fireReference.action.ReadValue<float>() > gun.fireThreshhold;
 
-        bool fireIsValid = ValidateFire();
+        if (!actionHeld) hasAlreadyFired = false;
 
-        if (fireIsValid) DoFire();
-        else DoFireFailed();
+        if (actionHeld && hasAlreadyFired) return;
+
+        if(actionHeld && !hasAlreadyFired)
+        {
+            bool fireIsValid = ValidateFire();
+
+            if (fireIsValid) DoFire();
+            else DoFireFailed();
+
+            hasAlreadyFired = true;
+        }
+    }
+
+    bool ActionCheck() 
+    {
+        return fireReference.action.ReadValue<float>() < gun.fireThreshhold;
+    }
+
+    IEnumerator UpdateLoop()
+    {
+        while (true)
+        {
+            yield return new WaitUntil(ActionCheck);
+        }
     }
 
     bool ValidateFire()
@@ -64,8 +87,40 @@ public class Gun : MonoBehaviour
     void FireOnce()
     {
         Debug.Log("Shots fired");
-        interactor.SendHapticImpulse(0.5f, 0.1f);
+        interactor.SendHapticImpulse(0.85f, 0.1f);
         OnFireEvent.Invoke();
+
+        if(gun.spreadStrength == 0) RaycastShot(transform.forward);
+        else
+        {
+            float randX = UnityEngine.Random.Range(-gun.spreadStrength, gun.spreadStrength);
+            float randY = UnityEngine.Random.Range(-gun.spreadStrength, gun.spreadStrength);
+            Vector3 spread = transform.forward +
+                transform.right * randX +
+                transform.up * randY;
+            RaycastShot(spread);
+        }
+    }
+
+    void RaycastShot(Vector3 direction)
+    {
+        RaycastHit hit;
+        Ray ray = new Ray(shootingOrigin.position,direction);
+        Physics.Raycast(ray, out hit);
+
+        GameObject lineRend = new GameObject();
+        LineRenderer line = lineRend.AddComponent<LineRenderer>();
+        line.SetPosition(0, shootingOrigin.position);
+        line.SetPosition(1, shootingOrigin.position + direction * 10);
+        line.SetWidth(0.001f, 0.001f);
+
+        StartCoroutine(DestroyGameObjectAfterSeconds(lineRend, 0.5f));
+    }
+
+    IEnumerator DestroyGameObjectAfterSeconds(GameObject obj, float time)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(obj);
     }
 
     IEnumerator FireMultiple()
@@ -92,7 +147,7 @@ public class Gun : MonoBehaviour
     void DoFireFailed()
     {
         //Code failed for if a fire does not happen
-
+        interactor.SendHapticImpulse(0.05f, 0.1f);
     }
 
     public void Reload()
