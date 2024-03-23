@@ -9,9 +9,10 @@ public class BulletTracer : MonoBehaviour
     Material mat;
     LineRenderer line;
 
-    public void Init(Vector3 startpos, Vector3 endpos)
+    public void Init(Vector3 startpos, Vector3 endpos, float width)
     {
         line = GetComponent<LineRenderer>();
+        line.SetWidth(width, width);
         mat = line.material;
         line.SetPosition(0, startpos);
         line.SetPosition(1, endpos);

@@ -117,8 +117,8 @@ public class Gun : MonoBehaviour
     void RaycastShot(Vector3 direction)
     {
         RaycastHit hit;
-        Ray ray = new Ray(shootingOrigin.position,direction);
-        Physics.Raycast(ray, out hit);
+        Physics.SphereCast(shootingOrigin.position, gun.raycastRadius, direction, out hit);
+
         BulletTracer tracer = Instantiate(tracerPrefab).GetComponent<BulletTracer>();
 
         /*//Prototype Laser
@@ -132,7 +132,7 @@ public class Gun : MonoBehaviour
         if (hit.collider)
         {
             NetworkTarget target = hit.collider.GetComponent<NetworkTarget>();
-            tracer.Init(shootingOrigin.position, hit.point);
+            tracer.Init(shootingOrigin.position, hit.point, gun.raycastRadius);
             if (target)
             {
                 target.SetPlayerScore(playerScore);
@@ -141,7 +141,7 @@ public class Gun : MonoBehaviour
         }
         else
         {
-            tracer.Init(shootingOrigin.position, shootingOrigin.position + direction * 25);
+            tracer.Init(shootingOrigin.position, shootingOrigin.position + direction * 25, gun.raycastRadius);
         }
     }
 
