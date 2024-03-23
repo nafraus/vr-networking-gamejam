@@ -19,6 +19,6 @@ MonoBehaviour:
   recoilStrength: 0
   recoilRecoveryRate: 0
   spreadStrength: 0.1
-  clipSize: 20
+  clipSize: 2
   fireRateTime: 1
   reloadTime: 0

@@ -5,9 +5,12 @@ using UnityEngine;
 public class ReloadingTrigger : MonoBehaviour
 {
     Vector3 eulerRotation;
+    [SerializeField] private Transform followTransform;
     void Update()
     {
-        eulerRotation = new Vector3(0, transform.rotation.eulerAngles.y, 0);
+        eulerRotation = new Vector3(0, followTransform.rotation.eulerAngles.y, 0);
+        transform.rotation = Quaternion.Euler(eulerRotation);
+        transform.position = followTransform.position;
     }
 
     private void OnTriggerEnter(Collider other)

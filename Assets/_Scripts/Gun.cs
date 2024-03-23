@@ -46,12 +46,15 @@ public class Gun : MonoBehaviour
 
         if(actionHeld && !hasAlreadyFired)
         {
+            hasAlreadyFired = true;
+
+            Debug.Log("Fire Called");
             bool fireIsValid = ValidateFire();
 
-            if (fireIsValid) DoFire();
-            else DoFireFailed();
-
-            hasAlreadyFired = true;
+            if (fireIsValid)
+            {
+                DoFire();
+            }
         }
     }
 
@@ -70,7 +73,11 @@ public class Gun : MonoBehaviour
 
     bool ValidateFire()
     {
-        if (currentClipCount == 0) return false;
+        if (currentClipCount == 0)
+        {
+            DoFireFailed();
+            return false;
+        }
 
         if (timeSinceLastShot < gun.fireRateTime) return false;
 
@@ -85,7 +92,7 @@ public class Gun : MonoBehaviour
 
         //Fire, single or burst shot
         if (gun.burstSize == 1) FireOnce();
-        else FireMultiple();
+        else StartCoroutine(FireMultiple());
     }
 
     void FireOnce()
@@ -117,7 +124,7 @@ public class Gun : MonoBehaviour
         LineRenderer line = lineRend.AddComponent<LineRenderer>();
         line.SetPosition(0, shootingOrigin.position);
         line.SetPosition(1, shootingOrigin.position + direction * 10);
-        line.SetWidth(0.001f, 0.001f);
+        line.SetWidth(0.005f, 0.005f);
 
         StartCoroutine(DestroyGameObjectAfterSeconds(lineRend, 0.5f));
 
@@ -159,12 +166,15 @@ public class Gun : MonoBehaviour
 
     void DoFireFailed()
     {
+        Debug.Log("FireFailed");
         //Code failed for if a fire does not happen
+        OnEmptyMagEvent.Invoke();
         interactor.SendHapticImpulse(0.05f, 0.1f);
     }
 
     public void Reload()
     {
+        OnReloadEvent.Invoke();
         currentClipCount = 0;
         StartCoroutine(ReloadLoop());
     }
