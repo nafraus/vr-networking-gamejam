@@ -8,27 +8,26 @@ using UnityEngine;
 public class NetworkTarget : NetworkBehaviour
 {
     [SerializeField] private int score;
-    [ReadOnly] private NetworkPlayerScore netPlayScore;
+    [ReadOnly] private PlayerScore playerScore;
 
     /// <summary>
-    /// Despawns the target and adds score for the specified player 
+    /// Despawns the target and adds score for the specified player.  
     /// </summary>
-    [ServerRpc]
-    public void TargetHitServerRpc()
+    public void TargetHitServer()
     {
         // Destroy self
         NetworkObject.Despawn();
 
         // Add score to score manager for the provided player
-        netPlayScore.AddScoreServerRpc(score);
+        playerScore.AddScoreServerRpc(score);
     }
 
     /// <summary>
-    /// To be called on client to tell target which player earns score when hit
+    /// To be called on client to tell target which player earns score when hit.
     /// </summary>
-    /// <param name="nps"></param>
-    public void SetNetworkPlayerScore(NetworkPlayerScore nps)
+    /// <param name="ps"> Specified PlayerScore. </param>
+    public void SetPlayerScore(PlayerScore ps)
     {
-        netPlayScore = nps;
+        playerScore = ps;
     }
 }

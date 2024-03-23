@@ -1,5 +1,5 @@
 ## Player
-- [ ] Grub gun thing
+- [x] Grub gun thing
 - [ ] Capybara hands/paws
 - [ ] Capybara head
 - [ ] Grub gun modifiers
