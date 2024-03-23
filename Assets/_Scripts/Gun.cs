@@ -5,34 +5,15 @@ using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using NaughtyAttributes;
 using System.Threading;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Gun : MonoBehaviour
 {
     #region Inspector Fields
+    [SerializeField] private XRDirectInteractor interactor;
     [SerializeField] private InputActionProperty fireReference;
-    [SerializeField] private float fireThreshhold;
-
-    //Firing
-    [Header("Firing")]
-    [SerializeField] private int burstSize;
-    [SerializeField] private float burstRechamberTime;
     public UnityEvent OnFireEvent;
-    [SerializeField] private float raycastRadius;
-
-    //Recoil
-    [Header("Recoil")]
-    [SerializeField] private float recoilStrength;
-    [SerializeField] private float recoilRecoveryRate;
-
-    //Spread;
-    [Header("Spread")]
-    [SerializeField] private float spreadStrength;
-
-    //Clip
-    [Header("Clip")]
-    [SerializeField] private int clipSize;
-    [SerializeField] private float fireRateTime;
-    [SerializeField] private float reloadTime;
+    [SerializeField] private GunSettingsSO gun;
     #endregion
 
     //Effects Dictionary / List
@@ -40,62 +21,69 @@ public class Gun : MonoBehaviour
     private int currentClipCount;
     private float timeSinceLastShot;
     private float timeSinceLastBurstShot;
+    private float isFireHeld;
 
     void Start()
     {
-
+        currentClipCount = gun.clipSize;
     }
 
     // Update is called once per frame
     void Update()
     {
+        timeSinceLastShot += Time.fixedDeltaTime;
         float fireValue = fireReference.action.ReadValue<float>();
-        if (fireValue < fireThreshhold) return;
+        if (fireValue < gun.fireThreshhold) return;
 
         bool fireIsValid = ValidateFire();
 
         if (fireIsValid) DoFire();
         else DoFireFailed();
-
-        
     }
 
     bool ValidateFire()
     {
+        if (currentClipCount == 0) return false;
+
+        if (timeSinceLastShot < gun.fireRateTime) return false;
+
         return true;
     }
 
     void DoFire()
     {
+        timeSinceLastShot = 0;
         //Expend an ammo
         currentClipCount--;
 
         //Fire, single or burst shot
-        if (burstSize == 1) FireOnce();
+        if (gun.burstSize == 1) FireOnce();
         else FireMultiple();
     }
 
     void FireOnce()
     {
-
+        Debug.Log("Shots fired");
+        interactor.SendHapticImpulse(0.5f, 0.1f);
+        OnFireEvent.Invoke();
     }
 
     IEnumerator FireMultiple()
     {
         int bulletsFired = 0;
-        timeSinceLastBurstShot = 0;
+        timeSinceLastBurstShot = gun.burstRechamberTime;
 
-        while (bulletsFired != burstSize)
+        while (bulletsFired != gun.burstSize)
         {
-            timeSinceLastBurstShot += Time.fixedDeltaTime;
-            if(timeSinceLastBurstShot >= burstRechamberTime)
+            if(timeSinceLastBurstShot >= gun.burstRechamberTime)
             {
-                void FireOnce()
-                {
 
-                }
+                FireOnce();
+                bulletsFired++;
                 timeSinceLastBurstShot = 0;
             }
+
+            timeSinceLastBurstShot += Time.fixedDeltaTime;
 
             yield return new WaitForFixedUpdate();
         }
@@ -114,8 +102,8 @@ public class Gun : MonoBehaviour
 
     IEnumerator ReloadLoop()
     {
-        yield return new WaitForSeconds(reloadTime);
-        currentClipCount = clipSize;
+        yield return new WaitForSeconds(gun.reloadTime);
+        currentClipCount = gun.clipSize;
     }
 }
 

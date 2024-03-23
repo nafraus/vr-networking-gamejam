@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1591014257784421237}
   - component: {fileID: 6622098264753475875}
   - component: {fileID: 7432615325541868032}
+  - component: {fileID: 7440123221894630281}
   m_Layer: 0
   m_Name: SimpleGun
   m_TagString: Untagged
@@ -84,6 +85,43 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7440123221894630281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976359851450299076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791108d528ef8164aaec9b48407524ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireReference:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Fire Reference
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 56c46be7-754d-4a89-bc32-4d38801e36da
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  fireThreshhold: 0
+  burstSize: 0
+  burstRechamberTime: 0
+  OnFireEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  raycastRadius: 0
+  recoilStrength: 0
+  recoilRecoveryRate: 0
+  spreadStrength: 0
+  clipSize: 0
+  fireRateTime: 0
+  reloadTime: 0
 --- !u!1 &2112399094630305028
 GameObject:
   m_ObjectHideFlags: 0
