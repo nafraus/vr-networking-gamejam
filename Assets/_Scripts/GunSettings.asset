@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5910c721a726c48ba5034dd8e6cae9, type: 3}
   m_Name: GunSettings
   m_EditorClassIdentifier: 
-  fireThreshhold: 0
-  burstSize: 0
+  fireThreshhold: 0.85
+  burstSize: 1
   burstRechamberTime: 0
   raycastRadius: 0
   recoilStrength: 0
   recoilRecoveryRate: 0
   spreadStrength: 0
-  clipSize: 0
-  fireRateTime: 0
+  clipSize: 3
+  fireRateTime: 1
   reloadTime: 0
