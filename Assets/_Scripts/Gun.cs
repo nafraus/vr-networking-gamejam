@@ -16,6 +16,7 @@ public class Gun : MonoBehaviour
     public UnityEvent OnFireEvent;
     [SerializeField] private GunSettingsSO gun;
     [SerializeField] private Transform shootingOrigin;
+    [SerializeField] private PlayerScore playerScore;
     #endregion
 
     //Effects Dictionary / List
@@ -108,6 +109,7 @@ public class Gun : MonoBehaviour
         Ray ray = new Ray(shootingOrigin.position,direction);
         Physics.Raycast(ray, out hit);
 
+        //Prototype Laser
         GameObject lineRend = new GameObject();
         LineRenderer line = lineRend.AddComponent<LineRenderer>();
         line.SetPosition(0, shootingOrigin.position);
@@ -115,6 +117,14 @@ public class Gun : MonoBehaviour
         line.SetWidth(0.001f, 0.001f);
 
         StartCoroutine(DestroyGameObjectAfterSeconds(lineRend, 0.5f));
+
+        //Look for target
+        NetworkTarget target = hit.collider.GetComponent<NetworkTarget>();
+        if (target)
+        {
+            target.SetPlayerScore(playerScore);
+            target.TargetHitServer();
+        }
     }
 
     IEnumerator DestroyGameObjectAfterSeconds(GameObject obj, float time)
