@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using NaughtyAttributes;
 using Unity.Netcode;
 using UnityEngine;
@@ -10,6 +7,15 @@ public class NetworkTarget : NetworkBehaviour
     [SerializeField] private int score;
     [ReadOnly] private PlayerScore playerScore;
 
+    private BoxCollider bColl;
+    private MeshRenderer mr;
+
+    private void Start()
+    {
+        bColl = GetComponent<BoxCollider>();
+        mr = GetComponent<MeshRenderer>();
+    }
+
     /// <summary>
     /// Despawns the target and adds score for the specified player.  
     /// </summary>
@@ -17,6 +23,10 @@ public class NetworkTarget : NetworkBehaviour
     {
         // Despawn
         DespawnServerRpc();
+        
+        // Disable collider and renderer
+        bColl.enabled = false;
+        mr.enabled = false;
 
         // Add score to score manager for the provided player
         playerScore.AddScoreServerRpc(score);
