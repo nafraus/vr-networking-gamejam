@@ -13,7 +13,7 @@ public class ScoreUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Vector3.Angle(Camera.main.transform.forward, -transform.up));
+        //Debug.Log(Vector3.Angle(Camera.main.transform.forward, -transform.up));
         if (isInBounds) text.color = Color.white;
         else text.color = Color.clear;
 
