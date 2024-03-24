@@ -7,10 +7,10 @@ public class ApplyGunModifier : MonoBehaviour
 {
     [SerializeField][Expandable] private GunModifier modifier;
     [SerializeField] private GunSettingsSO gunSettings;
-    PlayerScore score;
+    [SerializeField] private PlayerScore score;
     private void Awake()
     {
-        score = GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<PlayerScore>();
+        if(!score) score = GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<PlayerScore>();
     }
 
     [Button]
@@ -19,6 +19,7 @@ public class ApplyGunModifier : MonoBehaviour
         if (score.Score >= modifier.PointsCost)
         {
             score.AddScoreServerRpc(-modifier.PointsCost);
+            Debug.Log("Applied Gun Modifier");
             gunSettings.ApplyGunModifier(modifier);
             return true;
         }
@@ -30,4 +31,10 @@ public class ApplyGunModifier : MonoBehaviour
     {
         gunSettings.ClearModifiers();
     }
+
+    public GunModifier GetModifier()
+    {
+        return modifier;
+    }
+
 }

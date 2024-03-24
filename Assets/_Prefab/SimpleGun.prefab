@@ -92,7 +92,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  gun: {fileID: 11400000, guid: 300a4493ee9577a4ab2a69f38187f2fd, type: 2}
+  gunReferences: {fileID: 11400000, guid: 7c8d2b22aea8e064fa54caa4c1f64863, type: 2}
   shootingOrigin: {fileID: 4107912152316059645}
   playerScore: {fileID: 0}
   tracerPrefab: {fileID: 9097349038740216757, guid: 1234946aa2dff664bb459d9cace23758, type: 3}

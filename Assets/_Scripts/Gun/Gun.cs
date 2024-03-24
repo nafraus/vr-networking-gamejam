@@ -15,7 +15,7 @@ public class Gun : MonoBehaviour
     #region Inspector Fields
     [SerializeField] private XRDirectInteractor interactor;
     [SerializeField] private InputActionProperty fireReference;
-    [SerializeField] private GunSettingsSO gun;
+    [SerializeField] private GunsSO gunReferences;
     [SerializeField] private Transform shootingOrigin;
     [SerializeField] private PlayerScore playerScore;
     [SerializeField] private GameObject tracerPrefab;
@@ -31,6 +31,7 @@ public class Gun : MonoBehaviour
     private float timeSinceLastShot;
     private float timeSinceLastBurstShot;
     private bool hasAlreadyFired = false;
+    private GunSettingsSO gun => gunReferences.activeGun;
 
 
     #region Properties
@@ -67,7 +68,15 @@ public class Gun : MonoBehaviour
 
     void Start()
     {
-        currentClipCount = (int) ClipSize;
+        gunReferences.SetActiveGun(GunsSO.SetGunType.UI);
+        gunReferences.SetCurrentGun(GunsSO.SetGunType.Default);
+
+        currentClipCount = (int)ClipSize;
+    }
+
+    public void TurnOnCurrentGun()
+    {
+        gunReferences.SetActiveGun(GunsSO.SetGunType.CurrentGameGun);
     }
 
     // Update is called once per frame
@@ -145,6 +154,14 @@ public class Gun : MonoBehaviour
 
         GameObject tracerOBJ = Instantiate(tracerPrefab);
         BulletTracer tracer = tracerOBJ.GetComponent<BulletTracer>();
+        if (hit.collider)
+        {
+            tracer.Init(shootingOrigin.position, hit.point, RaycastRadius);
+        }
+        else
+        {
+            tracer.Init(shootingOrigin.position, shootingOrigin.position + direction * 25, RaycastRadius);
+        }
 
         //Look for target
         if (hit.collider)
@@ -154,7 +171,6 @@ public class Gun : MonoBehaviour
             {
                 case 6:
                     NetworkTarget target = hit.collider.GetComponent<NetworkTarget>();
-                    tracer.Init(shootingOrigin.position, hit.point, RaycastRadius);
                     if (target)
                     {
                         target.SetPlayerScore(playerScore);
@@ -163,14 +179,11 @@ public class Gun : MonoBehaviour
                     break;
                 case 9:
                     ShootableButton button = hit.collider.GetComponent<ShootableButton>();
-                    button.Activate();
+                    if(button) button.Activate();
                     break;
             }
         }
-        else
-        {
-            tracer.Init(shootingOrigin.position, shootingOrigin.position + direction * 25, RaycastRadius);
-        }
+
 
         //Last to make sure tracer is initialized
         if(NetworkManager.Singleton.IsConnectedClient) tracer.NetworkObject.Spawn(false);

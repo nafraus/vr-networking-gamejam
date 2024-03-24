@@ -7,7 +7,7 @@ public class GunModifier : ScriptableObject
 {
     public List<GunMods> GunMods;
     public int PointsCost;
-    public float AllowedUpgradeOccurances = 1;
+    public int AllowedUpgradeOccurances = 1;
 }
 
 

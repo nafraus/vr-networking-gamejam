@@ -15,11 +15,11 @@ MonoBehaviour:
   isUIMode: 0
   fireThreshhold: 0.85
   burstSize: 1
-  burstRechamberTime: 0.15
-  raycastRadius: 0.05
+  burstRechamberTime: 0
+  raycastRadius: 0.02
   recoilStrength: 0
   recoilRecoveryRate: 0
-  spreadStrength: 0.1
-  clipSize: 6
-  fireRateTime: 1
+  spreadStrength: 0.05
+  clipSize: 32
+  fireRateTime: 0.25
   reloadTime: 0
