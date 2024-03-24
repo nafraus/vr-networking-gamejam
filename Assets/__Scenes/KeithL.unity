@@ -959,6 +959,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &839920977 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8879930100863916882, guid: e82ec46a5cb28414ebac61888e272739, type: 3}
+  m_PrefabInstance: {fileID: 1939430210}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae2781e19c18ac479d813c8cd0baaf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &846812921
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,7 +2037,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1795988236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2338,6 +2349,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 437572899}
+    - target: {fileID: 680020596737426315, guid: e82ec46a5cb28414ebac61888e272739, type: 3}
+      propertyPath: playerScore
+      value: 
+      objectReference: {fileID: 839920977}
+    - target: {fileID: 680020596737426315, guid: e82ec46a5cb28414ebac61888e272739, type: 3}
+      propertyPath: bulletRaycastingLayers.m_Bits
+      value: 631
+      objectReference: {fileID: 0}
     - target: {fileID: 916962230301466098, guid: e82ec46a5cb28414ebac61888e272739, type: 3}
       propertyPath: target
       value: 
@@ -2390,6 +2409,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5310208188851062975, guid: e82ec46a5cb28414ebac61888e272739, type: 3}
+      propertyPath: playerScore
+      value: 
+      objectReference: {fileID: 839920977}
+    - target: {fileID: 5310208188851062975, guid: e82ec46a5cb28414ebac61888e272739, type: 3}
+      propertyPath: bulletRaycastingLayers.m_Bits
+      value: 631
+      objectReference: {fileID: 0}
     - target: {fileID: 6844531855794394489, guid: e82ec46a5cb28414ebac61888e272739, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -2419,7 +2446,9 @@ PrefabInstance:
       value: CartPlayer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3720458558261120562, guid: e82ec46a5cb28414ebac61888e272739, type: 3}
+    - {fileID: 8322639258575308038, guid: e82ec46a5cb28414ebac61888e272739, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4552591075466574562, guid: e82ec46a5cb28414ebac61888e272739, type: 3}
@@ -2997,6 +3026,26 @@ PrefabInstance:
     - target: {fileID: 6945014323534319674, guid: bd3d01762726bbb4f90c22e79f2d605d, type: 3}
       propertyPath: m_Name
       value: ReadyUpZone (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7169834589797222932, guid: bd3d01762726bbb4f90c22e79f2d605d, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7169834589797222932, guid: bd3d01762726bbb4f90c22e79f2d605d, type: 3}
+      propertyPath: m_margin.x
+      value: 3.470295
+      objectReference: {fileID: 0}
+    - target: {fileID: 7169834589797222932, guid: bd3d01762726bbb4f90c22e79f2d605d, type: 3}
+      propertyPath: m_margin.z
+      value: 3.4151092
+      objectReference: {fileID: 0}
+    - target: {fileID: 9084262369707989150, guid: bd3d01762726bbb4f90c22e79f2d605d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.242
+      objectReference: {fileID: 0}
+    - target: {fileID: 9084262369707989150, guid: bd3d01762726bbb4f90c22e79f2d605d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.176
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

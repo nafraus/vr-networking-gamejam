@@ -20,6 +20,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private Transform shootingOrigin;
     [SerializeField] private PlayerScore playerScore;
     [SerializeField] private GameObject tracerPrefab;
+    [SerializeField] private LayerMask bulletRaycastingLayers;
     #endregion
 
     [Foldout("Events")][SerializeField] private UnityEvent OnFireEvent;
@@ -78,7 +79,6 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("CONNECTED: "+NetworkManager.Singleton.IsConnectedClient);
         timeSinceLastShot += Time.fixedDeltaTime;
         bool actionHeld = fireReference.action.ReadValue<float>() > FireThreshold;
 
@@ -90,7 +90,6 @@ public class Gun : MonoBehaviour
         {
             hasAlreadyFired = true;
 
-            Debug.Log("Fire Called");
             bool fireIsValid = ValidateFire();
 
             if (fireIsValid)
@@ -146,7 +145,7 @@ public class Gun : MonoBehaviour
     void RaycastShot(Vector3 direction)
     {
         RaycastHit hit;
-        Physics.SphereCast(shootingOrigin.position, RaycastRadius, direction, out hit);
+        Physics.SphereCast(shootingOrigin.position, RaycastRadius, direction, out hit, 100, bulletRaycastingLayers);
 
         GameObject tracerOBJ = Instantiate(tracerPrefab);
         BulletTracer tracer = tracerOBJ.GetComponent<BulletTracer>();
