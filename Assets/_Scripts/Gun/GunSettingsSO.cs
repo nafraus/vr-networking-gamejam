@@ -7,6 +7,7 @@ using static UnityEngine.Rendering.DebugUI;
 [CreateAssetMenu(fileName = "GunSettings", menuName = "ScriptableObject/GunSettings", order = 0)]
 public class GunSettingsSO : ScriptableObject
 {
+    public bool isUIMode;
     //Firing
     [Header("Firing")]
     [SerializeField] public float fireThreshhold;
@@ -29,12 +30,13 @@ public class GunSettingsSO : ScriptableObject
     [SerializeField] public float fireRateTime;
     [SerializeField] public float reloadTime;
 
-    private Dictionary<ModifierType, List<GunMods>> modifiers = new Dictionary<ModifierType, List<GunMods>>();
+    private static Dictionary<ModifierType, List<GunMods>> modifiers = new Dictionary<ModifierType, List<GunMods>>();
 
     [HideInInspector] public Dictionary<ModifierType, List<GunMods>> Modifiers { get => modifiers; }
 
     public float GetModifierValueModifierType(ModifierType type)
     {
+        if (isUIMode) return 0;
         if (!modifiers.ContainsKey(type)) return 0;
 
         float value = 0;

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TestingGunModifier
   m_EditorClassIdentifier: 
   GunMods:
-  - modifierType: 0
+  - modifierType: 2
     IsReplacing: 0
-    Value: 0.1
+    Value: 4
   PointsCost: 0
   AllowedUpgradeOccurances: 1

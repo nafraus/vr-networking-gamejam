@@ -149,12 +149,22 @@ public class Gun : MonoBehaviour
         //Look for target
         if (hit.collider)
         {
-            NetworkTarget target = hit.collider.GetComponent<NetworkTarget>();
-            tracer.Init(shootingOrigin.position, hit.point, RaycastRadius);
-            if (target)
+            int layer = hit.collider.gameObject.layer;
+            switch (layer)
             {
-                target.SetPlayerScore(playerScore);
-                target.TargetHitServer();
+                case 6:
+                    NetworkTarget target = hit.collider.GetComponent<NetworkTarget>();
+                    tracer.Init(shootingOrigin.position, hit.point, RaycastRadius);
+                    if (target)
+                    {
+                        target.SetPlayerScore(playerScore);
+                        target.TargetHitServer();
+                    }
+                    break;
+                case 9:
+                    ShootableButton button = hit.collider.GetComponent<ShootableButton>();
+                    button.Activate();
+                    break;
             }
         }
         else

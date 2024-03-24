@@ -30,3 +30,11 @@ public enum ModifierType
     ReduceBurstRechamberTime,
     FullLaser
 }
+
+public static class ClearGunModifiers
+{
+    public static void Clear(GunSettingsSO gunSettings)
+    {
+        gunSettings.ClearModifiers();
+    }
+}

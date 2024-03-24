@@ -14,13 +14,15 @@ public class ApplyGunModifier : MonoBehaviour
     }
 
     [Button]
-    public void TryActivateGunModifier()
+    public bool TryActivateGunModifier()
     {
         if (score.Score >= modifier.PointsCost)
         {
             score.AddScoreServerRpc(-modifier.PointsCost);
             gunSettings.ApplyGunModifier(modifier);
+            return true;
         }
+        else return false;
     }
 
     [Button]

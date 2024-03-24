@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f5910c721a726c48ba5034dd8e6cae9, type: 3}
-  m_Name: GunSettings
+  m_Name: DefaultGunSettings
   m_EditorClassIdentifier: 
+  isUIMode: 0
   fireThreshhold: 0.85
   burstSize: 1
   burstRechamberTime: 0.15
