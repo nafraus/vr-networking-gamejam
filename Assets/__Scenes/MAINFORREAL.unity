@@ -895,6 +895,7 @@ GameObject:
   - component: {fileID: 979762657}
   - component: {fileID: 979762659}
   - component: {fileID: 979762660}
+  - component: {fileID: 979762661}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -925,6 +926,7 @@ MonoBehaviour:
   - {fileID: 247636709}
   - {fileID: 122543323}
   - {fileID: 80741884}
+  splineWalkers: []
   CountdownAudio:
     m_PersistentCalls:
       m_Calls:
@@ -1071,6 +1073,21 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &979762661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979762655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a47cdd834955974ba4b76314134ef91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxConnection: 2
+  transport: {fileID: 1795988236}
+  joinCode: 
 --- !u!1001 &1027740081
 PrefabInstance:
   m_ObjectHideFlags: 0
