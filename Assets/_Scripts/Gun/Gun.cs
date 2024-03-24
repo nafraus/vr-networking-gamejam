@@ -9,6 +9,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 using System;
 using Unity.Netcode;
 using Unity.Services.Relay;
+using UnityEngine.XR.Interaction.Toolkit.UI;
 
 public class Gun : MonoBehaviour
 {
@@ -57,7 +58,7 @@ public class Gun : MonoBehaviour
     }
     public float ClipSize
     {
-        get => gun.clipSize - gun.GetModifierValueModifierType(ModifierType.AddClipSize);
+        get => gun.clipSize + gun.GetModifierValueModifierType(ModifierType.AddClipSize);
     }
     public float FireRateTime
     {
@@ -72,11 +73,6 @@ public class Gun : MonoBehaviour
         gunReferences.SetCurrentGun(GunsSO.SetGunType.Default);
 
         currentClipCount = (int)ClipSize;
-    }
-
-    public void TurnOnCurrentGun()
-    {
-        gunReferences.SetActiveGun(GunsSO.SetGunType.CurrentGameGun);
     }
 
     // Update is called once per frame
@@ -170,6 +166,7 @@ public class Gun : MonoBehaviour
             switch (layer)
             {
                 case 6:
+                    
                     NetworkTarget target = hit.collider.GetComponent<NetworkTarget>();
                     if (target)
                     {
@@ -178,6 +175,7 @@ public class Gun : MonoBehaviour
                     }
                     break;
                 case 9:
+                    if (!gun.isUIMode) break;
                     ShootableButton button = hit.collider.GetComponent<ShootableButton>();
                     if(button) button.Activate();
                     break;
@@ -233,5 +231,18 @@ public class Gun : MonoBehaviour
         currentClipCount = (int) ClipSize;
     }
     #endregion
+
+
+    public void TurnOnCurrentGun()
+    {
+        if(gunReferences.activeGun != gunReferences.uiGun)
+        {
+            gunReferences.SetActiveGun(GunsSO.SetGunType.UI);
+        }
+        else gunReferences.SetActiveGun(GunsSO.SetGunType.CurrentGameGun);
+
+        Reload();
+        currentClipCount = (int)ClipSize;
+    }
 }
 
