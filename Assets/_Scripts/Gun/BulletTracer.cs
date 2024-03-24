@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class BulletTracer : MonoBehaviour
+public class BulletTracer : NetworkBehaviour
 {
     [SerializeField] private float secondsOfFullFade = 0.25f;
     [SerializeField] private float secondsToFadeOut = 0.5f;
@@ -42,6 +43,13 @@ public class BulletTracer : MonoBehaviour
     IEnumerator DestroyGameObjectAfterSeconds(GameObject obj, float time)
     {
         yield return new WaitForSeconds(time);
-        Destroy(obj);
+        DespawnServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void DespawnServerRpc()
+    {
+        // Destroy self
+        NetworkObject.Despawn();
     }
 }

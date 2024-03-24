@@ -7,6 +7,7 @@ using NaughtyAttributes;
 using System.Threading;
 using UnityEngine.XR.Interaction.Toolkit;
 using System;
+using Unity.Netcode;
 
 public class Gun : MonoBehaviour
 {
@@ -119,14 +120,8 @@ public class Gun : MonoBehaviour
         RaycastHit hit;
         Physics.SphereCast(shootingOrigin.position, gun.raycastRadius, direction, out hit);
 
-        BulletTracer tracer = Instantiate(tracerPrefab).GetComponent<BulletTracer>();
-
-        /*//Prototype Laser
-        GameObject lineRend = new GameObject();
-        LineRenderer line = lineRend.AddComponent<LineRenderer>();
-        line.SetPosition(0, shootingOrigin.position);
-        line.SetPosition(1, shootingOrigin.position + direction * 10);
-        line.SetWidth(0.005f, 0.005f);*/
+        GameObject tracerOBJ = Instantiate(tracerPrefab);
+        BulletTracer tracer = tracerOBJ.GetComponent<BulletTracer>();
 
         //Look for target
         if (hit.collider)
@@ -143,6 +138,9 @@ public class Gun : MonoBehaviour
         {
             tracer.Init(shootingOrigin.position, shootingOrigin.position + direction * 25, gun.raycastRadius);
         }
+
+        //Last to make sure tracer is initialized
+        tracer.NetworkObject.Spawn();
     }
 
     IEnumerator FireMultiple()
