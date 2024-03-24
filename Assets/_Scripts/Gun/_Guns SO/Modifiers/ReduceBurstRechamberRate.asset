@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e3675c1ec1109408fac3417a32fc42, type: 3}
   m_Name: ReduceBurstRechamberRate
   m_EditorClassIdentifier: 
-  GunMods:
-  - modifierType: 6
-    IsReplacing: 0
-    Value: 0.02
-  PointsCost: 30
-  AllowedUpgradeOccurances: 3
+  GunMods: []
+  PointsCost: 0
+  AllowedUpgradeOccurances: 0
