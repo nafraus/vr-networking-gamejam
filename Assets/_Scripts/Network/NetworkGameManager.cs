@@ -35,18 +35,18 @@ public class NetworkGameManager : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         // Get connected players
-        Debug.Log(NetworkManager.Singleton.ConnectedClients.Count);
-        for (int playerNum = 0; playerNum < NetworkManager.Singleton.ConnectedClients.Count; playerNum++)
-        {
-            NetworkObject player = NetworkManager.Singleton.ConnectedClients[0].PlayerObject;
-            playerNObs.Add(player.OwnerClientId, player);
-        }
+        // Debug.Log(NetworkManager.Singleton.ConnectedClients.Count);
+        // for (int playerNum = 0; playerNum < NetworkManager.Singleton.ConnectedClients.Count; playerNum++)
+        // {
+        //     NetworkObject player = NetworkManager.Singleton.ConnectedClients[0].PlayerObject;
+        //     playerNObs.Add(player.OwnerClientId, player);
+        // }
         
         // Get player score components 
-        foreach (NetworkObject pNOb in playerNObs.Values)
-        {
-            playerScores.Add(pNOb.OwnerClientId, pNOb.GetComponent<PlayerScore>());
-        }
+        // foreach (NetworkObject pNOb in playerNObs.Values)
+        // {
+        //     playerScores.Add(pNOb.OwnerClientId, pNOb.GetComponent<PlayerScore>());
+        // }
         
         // Stall player spline walkers
         foreach (NetworkObject playerNOb in playerNObs.Values)

@@ -12,7 +12,7 @@ public class SplineAssignment : NetworkBehaviour
     private void Awake()
     {
         // Set correct spline based on hosting or joining
-        bwws.spline = NetworkManager.Singleton.IsHost ? 
+        bwws.spline = NetworkManager.Singleton.ConnectedClients.Count == 1 ? 
             FindObjectOfType<NetworkGameManager>().GetTrackAStart() : 
             FindObjectOfType<NetworkGameManager>().GetTrackBStart();
 
