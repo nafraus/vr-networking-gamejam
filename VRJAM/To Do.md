@@ -36,33 +36,34 @@ tags:
 6. [x] Implement haptics system
 ### Day 2:
 1. [!] Networked gun mechanic
-	1. [ ] Fix Burst
-	2. [ ] Tracers
-	3. [ ] Reload
+	1. [x] Fix Burst
+	2. [ ] Networked tracers
+	3. [x] Reload
 	4. [x] Raycast uses hit target script
-2. [ ] Networked targets
+	5. [x] Dynamic bullet size with raycast
+2. [x] Networked targets
 	1. [x] Confirm despawn
-	2. [!] Confirm spawns from scene for both clients
-	3. [ ] Confirm interaction with gun's raycast
+	2. [x] Confirm spawns from scene for both clients
+	3. [x] Confirm interaction with gun's raycast
 3. [ ] Make score system non-networked
 	1. [x] Confirm score adding works
-	2. [ ] Make each client's score reference available to the game manager
+	2. [?] Make each client's score reference available to the game manager
 	3. [>] Make each client's score reference available to the shop system?
 4. [ ] Introduce game manager and core game loop
 	1. [ ] Hand + trigger based ready up system (copy code from reload system)
 	2. [ ] Sync'd ride start for both players
 	3. [ ] Shop with score system
 	4. [ ] Continue next ride segment after shop phase (shop phases timer based, 10s to start)
-5. [ ] Basic menu navigation
+5. [>] Basic menu navigation
 	1. [ ] Stationary rig with raycast to world space menus
-		1. [ ] Lobby code join/create system
+		1. [ ] Lobby join/create system using [tutorial](https://youtu.be/Pry4grExYQQ?si=HFvAJGPH2Xi1Q8EB)
 		2. [ ] Credits
 		3. [ ] Quit
 	2. [ ] Quick options menu on forearm (wristwatch style)
 		1. [ ] Retire (quit, only if in a match)
 		2. [ ] Volume sliders (music, sfx)
 		3. [ ] ==Red Light== Change handedness (swap options menu and gun)
-6. [ ] Upgrading grub model implementation
+2. [ ] Upgrading grub model implementation
 	1. [ ] Gun mod anchor transforms
 		1. [ ] Center of head (eyes, horns, ears, hats)
 		2. [ ] Base of head (root for body attachment point)
@@ -77,12 +78,14 @@ tags:
 				- tail upgrades for clip size will use sequential prefabs with each having one additional light than the last
 				- tail light system will need to be standalone and reference a gun script to determine how much ammo it has and modify its lights accordingly
 ### Day 3:
-1. [ ] Networked audio implementation
+1. [ ] Shop system
+	1. [ ] Script that adds upgrades to a player's gun
+2. [ ] Networked audio implementation
 3. [ ] Networked animations (if we end up with animations)
 4. [ ] Networked VFX implementation
 ## Art
 ### Day 1:
-- [ ] Acquire any assets we can
+- [x] Acquire any assets we can
 ### Day 2: 
 - [x] Talk to Rachel about grub gun
 ### Day 3:
