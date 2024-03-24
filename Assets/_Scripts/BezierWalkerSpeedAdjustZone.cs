@@ -9,7 +9,6 @@ namespace BezierSolution.Extras
     public class BezierWalkerSpeedAdjustZone : MonoBehaviour
     {
         [field: SerializeField] public float TargetSpeed { get; private set; } = .25f;
-        [SerializeField] private float accelerationRate = 6f;
         
         private BoxCollider bColl;
         private float initialSpeed;
@@ -32,7 +31,7 @@ namespace BezierSolution.Extras
             if (bwws != null)
             {
                 initialSpeed  = bwws.speed;
-                StartCoroutine(LerpSpeed(bwws, TargetSpeed));
+                bwws.speed = TargetSpeed;
             }
         }
 
@@ -41,17 +40,7 @@ namespace BezierSolution.Extras
             BezierWalkerWithSpeed bwws = other.GetComponent<BezierWalkerWithSpeed>();
             if (bwws != null)
             {
-                StartCoroutine(LerpSpeed(bwws, initialSpeed));
-            }
-        }
-
-        private IEnumerator LerpSpeed(BezierWalkerWithSpeed bwws, float targetSpeed)
-        {
-            while (bwws.speed != targetSpeed)
-            {
-                bwws.speed = Mathf.Lerp(bwws.speed, targetSpeed, Time.deltaTime * accelerationRate);
-                bwws.speed = Mathf.Clamp(bwws.speed, 0, targetSpeed);
-                yield return new WaitForEndOfFrame();
+                bwws.speed = initialSpeed;
             }
         }
     }
