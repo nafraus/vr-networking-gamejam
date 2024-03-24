@@ -10,9 +10,8 @@
 		- [ ] Single spine track (buck shot)
 		- [ ] Dual spine track (burst tap)
 	- [ ] Iron sight upgrade (lasers stacking)
-		- [ ] Between two ears (far laser)
-		- [ ] Align with horn (near laser)
-		- [ ] Grub holds laser pointer (full, predictive laser)
+		- [-] Between two ears (far laser) ==RED LIGHT==
+		- [-] Align with horn (near laser) ==RED LIGHT==
 	- [ ] Coloring (ammo stacking)
 		- [ ] Different head color (bigger burst size stacking)
 			- Default (1 burst)
