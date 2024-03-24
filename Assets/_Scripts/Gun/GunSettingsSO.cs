@@ -30,7 +30,7 @@ public class GunSettingsSO : ScriptableObject
     [SerializeField] public float fireRateTime;
     [SerializeField] public float reloadTime;
 
-    private static Dictionary<ModifierType, List<GunMods>> modifiers = new Dictionary<ModifierType, List<GunMods>>();
+    private Dictionary<ModifierType, List<GunMods>> modifiers = new Dictionary<ModifierType, List<GunMods>>();
 
     [HideInInspector] public Dictionary<ModifierType, List<GunMods>> Modifiers { get => modifiers; }
 
