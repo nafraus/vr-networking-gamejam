@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "GunModifier", fileName = "ScriptableObject/GunModifier", order = 0)]
+[CreateAssetMenu(menuName = "ScriptableObject/GunModifier", fileName = "GunModifier", order = 0)]
 public class GunModifier : ScriptableObject
 {
     public List<GunMods> GunMods;
@@ -13,19 +13,20 @@ public class GunModifier : ScriptableObject
 
 [System.Serializable]
 public struct GunMods
-{
-    public enum ModifierType
-    {
-        ReduceSpreadValue,
-        IncreaseBulletRadius,
-        AddBurstCount,
-        AddClipSize,
-        ReduceTriggerThreshhold,
-        ReduceFireRate,
-        FullLaser
-    }
-
+{ 
     public ModifierType modifierType;
     public bool IsReplacing;
     public float Value;
+}
+
+public enum ModifierType
+{
+    ReduceSpreadValue,
+    IncreaseBulletRadius,
+    AddBurstCount,
+    AddClipSize,
+    ReduceTriggerThreshhold,
+    ReduceFireRate,
+    ReduceBurstRechamberTime,
+    FullLaser
 }

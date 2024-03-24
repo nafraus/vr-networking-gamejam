@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BulletTracer : NetworkBehaviour
 {
@@ -13,7 +14,10 @@ public class BulletTracer : NetworkBehaviour
     public void Init(Vector3 startpos, Vector3 endpos, float width)
     {
         line = GetComponent<LineRenderer>();
-        line.SetWidth(width, width);
+
+        line.startWidth = width;
+        line.endWidth = width;
+
         mat = line.material;
         line.SetPosition(0, startpos);
         line.SetPosition(1, endpos);
@@ -43,7 +47,8 @@ public class BulletTracer : NetworkBehaviour
     IEnumerator DestroyGameObjectAfterSeconds(GameObject obj, float time)
     {
         yield return new WaitForSeconds(time);
-        DespawnServerRpc();
+        if (NetworkManager.Singleton.IsConnectedClient) DespawnServerRpc();
+        else Destroy(gameObject);
     }
 
     [ServerRpc(RequireOwnership = false)]

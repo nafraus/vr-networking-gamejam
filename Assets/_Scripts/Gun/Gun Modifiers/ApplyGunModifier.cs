@@ -10,10 +10,22 @@ public class ApplyGunModifier : MonoBehaviour
     PlayerScore score;
     private void Awake()
     {
-        GameObject.FindGameObjectWithTag("PlayerScore");
+        score = GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<PlayerScore>();
     }
-    void TryActivateGunModifier()
+
+    [Button]
+    public void TryActivateGunModifier()
     {
-        if(score.Score >= modifier.PointsCost) score.AddScoreServerRpc(-modifier.PointsCost);
+        if (score.Score >= modifier.PointsCost)
+        {
+            score.AddScoreServerRpc(-modifier.PointsCost);
+            gunSettings.ApplyGunModifier(modifier);
+        }
+    }
+
+    [Button]
+    public void Clear()
+    {
+        gunSettings.ClearModifiers();
     }
 }
