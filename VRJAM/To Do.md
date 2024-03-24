@@ -78,11 +78,16 @@ tags:
 				- tail upgrades for clip size will use sequential prefabs with each having one additional light than the last
 				- tail light system will need to be standalone and reference a gun script to determine how much ammo it has and modify its lights accordingly
 ### Day 3:
-1. [ ] Shop system
-	1. [ ] Script that adds upgrades to a player's gun
-2. [ ] Networked audio implementation
-3. [ ] Networked animations (if we end up with animations)
-4. [ ] Networked VFX implementation
+1. [x] Shop system
+	1. [-] Script that adds upgrades to a player's gun
+2. [?] Networked audio implementation
+3. [-] Networked animations (if we end up with animations)
+4. [-] Networked VFX implementation
+5. [ ] Trigger Extension zones hooked up to game manager
+	1. [ ] Enable shopping
+	2. [ ] Enable dueling
+	3. [ ] Current lap count ++
+6. [ ] CONFIRM THAT READY UP WORKS WITH GAME MANAGER
 ## Art
 ### Day 1:
 - [x] Acquire any assets we can
