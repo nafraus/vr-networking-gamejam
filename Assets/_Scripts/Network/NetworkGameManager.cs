@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using BezierSolution;
+using BezierSolution.Extras;
 using Unity.Netcode;
 using NaughtyAttributes;
 using UnityEditor;
@@ -12,10 +13,9 @@ using UnityEngine.Windows.Speech;
 
 public class NetworkGameManager : NetworkBehaviour
 {
-    private enum GameState { RideStart, Shopping, Dueling, RideEnd }
+    private enum GameState { RideStart, Dueling, RideEnd }
     [Header("General")]
     private GameState gameState = GameState.RideStart;
-    [SerializeField] private float shoppingTime = 10f;
     [SerializeField] private int maxLaps = 3;
     private int currentLap;
 
@@ -23,7 +23,7 @@ public class NetworkGameManager : NetworkBehaviour
     private BezierSpline[] trackASegments;
     private BezierSpline[] trackBSegments;
     
-    private Dictionary<ulong, NetworkPlayer> players;
+    private Dictionary<ulong, NetworkObject> playerNObs;
     private Dictionary<ulong, PlayerScore> playerScores;
     private BezierWalker[] splineWalkers;
 
@@ -32,19 +32,55 @@ public class NetworkGameManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        // Get tracks from scene
         splineWalkers = FindObjectsOfType<BezierWalker>();
         if (splineWalkers.Length > 0)
         {
             ((BezierWalkerWithSpeed)splineWalkers[0]).spline = trackASegments[0];
         }
 
+        // Get connected players
+        for (int playerNum = 0; playerNum < NetworkManager.Singleton.ConnectedClients.Count; playerNum++)
+        {
+            NetworkObject player = NetworkManager.Singleton.ConnectedClients[0].PlayerObject;
+            playerNObs.Add(player.OwnerClientId, player);
+        }
+        
+        // Get player score components 
+        foreach (NetworkObject pNOb in playerNObs.Values)
+        {
+            playerScores.Add(pNOb.OwnerClientId, pNOb.GetComponent<PlayerScore>());
+        }
+        
+        // Stall player spline walkers
+        foreach (NetworkObject playerNOb in playerNObs.Values)
+        {
+            BezierWalkerStaller staller = playerNOb.GetComponent<BezierWalkerStaller>();
+            staller.SetStallPoint(0);
+            staller.DoStall = true;
+        }
+
+        // Start game loop
         StartCoroutine(nameof(StartGameLoop));
     }
 
-    public void AddPlayer(ulong id, NetworkPlayer np)
+    private bool PlayersReady()
     {
-        players.Add(id, np);
-        playerScores.Add(id, np.GetComponent<PlayerScore>()); // THIS MIGHT NOT GRAB THE REFERENCE CORRECTLY
+        // Short exit for not enough players
+        if (playerNObs.Count < 2) return false;
+        
+        // For each player
+        foreach (NetworkObject pNOb in playerNObs.Values)
+        {
+            // If not ready, return false
+            if (!pNOb.GetComponent<ReadyUpSystem>().Ready)
+            {
+                return false;
+            }
+        }
+
+        // This line is only reached when all players are ready
+        return true;
     }
     
     private IEnumerator StartGameLoop()
@@ -60,7 +96,7 @@ public class NetworkGameManager : NetworkBehaviour
             case GameState.RideStart:
             {
                 // Wait for ready up from both players
-                if (true)
+                if (PlayersReady())
                 {
                     // Do countdown launch sequence
                     for (int i = 0; i < 3; i++)
@@ -72,60 +108,40 @@ public class NetworkGameManager : NetworkBehaviour
                     }
 
                     // Start both player's rides
-                    //==================================================================================================
+                    foreach (NetworkObject player in playerNObs.Values)
+                    {
+                        BezierWalkerStaller staller = player.GetComponent<BezierWalkerStaller>();
+                        staller.DoStall = false;
+                    }
 
                     // Change gameState
                     gameState = GameState.Dueling;
                 }
-
+                
+                Debug.Log("RIDE START");
                 break;
             }
 
-            case GameState.Shopping:
+            case GameState.Dueling:
             {
-                Debug.Log("SHOPPING");
-                
-                // Enable shopping
-                //======================================================================================================
-
-                // Wait for shopping to be over
-                yield return new WaitForSeconds(shoppingTime);
-
-                // Disable shopping
-                //======================================================================================================
-
-                // Change gameState
                 // If at last spline segment of track
                 if (splineWalkers[0].Spline == trackASegments[^1])
                 {
                     // If end of ride
                     if (currentLap >= maxLaps)
                     {
+                        // Change gameState
                         gameState = GameState.RideEnd;
                     }
                 }
-                else // Else start the next dueling segment
-                {
-                    gameState = GameState.Dueling;
-                }
                 
-                break;
-            }
-
-            case GameState.Dueling:
-            {
-                // DO NOTHING
-                // STATE CHANGE IS HANDLED USING SPLINE EVENTS CALLING EnableShopping
+                //Debug.Log("DUELING");
                 break;
             }
 
             case GameState.RideEnd:
             {
-                // Transition to post match scene
-                    // NEW SCENE SHOULD:
-                    // Display scores
-                    // Start timer
-                    // Enable UI to allow player to quit game and return to lobby
+                // Enable UI to allow player to quit game and return to lobby is done outside this script 
                 
                 Debug.Log("RIDE END");
                 break;
@@ -137,14 +153,5 @@ public class NetworkGameManager : NetworkBehaviour
         {
             StartCoroutine(nameof(GameLoop));
         }
-    }
-
-    /// <summary>
-    /// Called by the bezier solution to enable shopping and swap the gameState to Shopping
-    /// </summary>
-    public void EnableShopping()
-    {
-        Debug.Log("GOING SHOPPING");
-        gameState = GameState.Shopping;
     }
 }

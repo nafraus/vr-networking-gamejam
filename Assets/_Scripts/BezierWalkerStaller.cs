@@ -8,7 +8,7 @@ namespace BezierSolution.Extras
 {
     public class BezierWalkerStaller : MonoBehaviour
     {
-        [field: SerializeField] public bool DoStall { get; private set; } = false;
+        [field: SerializeField] public bool DoStall { get; set; } = false;
     
         private BezierWalkerWithSpeed walker;
         private float stallValue = 2;
