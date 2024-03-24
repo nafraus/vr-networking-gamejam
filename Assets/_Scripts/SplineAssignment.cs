@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using BezierSolution;
+using BezierSolution.Extras;
 using Unity.Netcode;
 using UnityEngine;
 
-public class SplineAssignment : MonoBehaviour
+public class SplineAssignment : NetworkBehaviour
 {
     [SerializeField] private BezierWalkerWithSpeed bwws;
     private void Awake()
@@ -14,7 +15,17 @@ public class SplineAssignment : MonoBehaviour
         bwws.spline = NetworkManager.Singleton.IsHost ? 
             FindObjectOfType<NetworkGameManager>().GetTrackAStart() : 
             FindObjectOfType<NetworkGameManager>().GetTrackBStart();
-        
-        Debug.Log($"{bwws.spline.gameObject.name}");
+
+        bwws.GetComponent<BezierWalkerStaller>().SetStallPoint(0);
+        bwws.GetComponent<BezierWalkerStaller>().DoStall = true;
+
+        AddToGMServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void AddToGMServerRpc()
+    {
+        Debug.Log("ADDING TO GM");
+        FindObjectOfType<NetworkGameManager>().splineWalkers.Add(bwws);
     }
 }

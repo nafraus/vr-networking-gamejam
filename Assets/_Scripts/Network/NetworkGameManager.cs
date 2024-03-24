@@ -10,6 +10,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Windows.Speech;
+using Unity.Services.Lobbies.Models;
 
 public class NetworkGameManager : NetworkBehaviour
 {
@@ -25,10 +26,12 @@ public class NetworkGameManager : NetworkBehaviour
     
     private Dictionary<ulong, NetworkObject> playerNObs;
     private Dictionary<ulong, PlayerScore> playerScores;
-    private BezierWalker[] splineWalkers;
+    public List<BezierWalkerWithSpeed> splineWalkers;
 
     [Header("Audio")]
     [SerializeField] private UnityEvent CountdownAudio;
+
+
     public override void OnNetworkSpawn()
     {
         // Get connected players
@@ -84,7 +87,7 @@ public class NetworkGameManager : NetworkBehaviour
             case GameState.RideStart:
             {
                 // Wait for ready up from both players
-                if (PlayersReady())
+                if (NetworkManager.Singleton.ConnectedClients.Count == 2)
                 {
                     // Do countdown launch sequence
                     for (int i = 0; i < 3; i++)
@@ -96,9 +99,9 @@ public class NetworkGameManager : NetworkBehaviour
                     }
 
                     // Start both player's rides
-                    foreach (NetworkObject player in playerNObs.Values)
+                    foreach(BezierWalker walker in splineWalkers)
                     {
-                        BezierWalkerStaller staller = player.GetComponent<BezierWalkerStaller>();
+                        BezierWalkerStaller staller = walker.GetComponent<BezierWalkerStaller>();
                         staller.DoStall = false;
                     }
 

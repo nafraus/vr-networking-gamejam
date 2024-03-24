@@ -13,6 +13,7 @@ namespace BezierSolution.Extras
         [SerializeField] private BezierSpline nextSpline;
     
         private BoxCollider bColl;
+        private bool used = false;
 
         private void Awake()
         {
@@ -28,11 +29,25 @@ namespace BezierSolution.Extras
 
         private void OnTriggerEnter(Collider other)
         {
-            BezierWalkerWithSpeed bwws = other.GetComponent<BezierWalkerWithSpeed>();
+            if (used) return;
+
+            // I DON'T KNOW WHICH OF THE FOLLOWING ACTUALLY GETS THE CORRECT REFERENCE TO BWWS
+            BezierWalkerWithSpeed bwws = other.GetComponent<BezierWalkerWithSpeed>();            
+            if (bwws == null) 
+            { 
+                bwws = other.GetComponentInChildren<BezierWalkerWithSpeed>();
+            }
+
+            if (bwws == null)
+            {
+                bwws = other.GetComponentInParent<BezierWalkerWithSpeed>();
+            }
+
             if (bwws != null)
             {
                 bwws.spline = nextSpline;
                 bwws.NormalizedT = 0;
+                used = true;
             }
         }
     }
