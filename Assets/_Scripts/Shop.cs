@@ -6,13 +6,15 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     [SerializeField] private List<ShootableButton> buttons = new List<ShootableButton>();
+    [SerializeField] private GunsSO gun;
 
     [Button]
     public void Enable()
     {
         foreach (var button in buttons) 
         { 
-            button.Enable();    
+            button.Enable();
+            gun.SetActiveGun(GunsSO.SetGunType.UI);
         }
     }
 
@@ -22,6 +24,7 @@ public class Shop : MonoBehaviour
         foreach (var button in buttons)
         {
             button.Disable();
+            gun.SetActiveGun(GunsSO.SetGunType.CurrentGameGun);
         }
     }
 
