@@ -20,8 +20,8 @@ public class NetworkGameManager : NetworkBehaviour
     private int currentLap;
 
     [Header("Tracks/Paths")]
-    private BezierSpline[] trackASegments;
-    private BezierSpline[] trackBSegments;
+    [SerializeField] private BezierSpline[] trackASegments;
+    [SerializeField] private BezierSpline[] trackBSegments;
     
     private Dictionary<ulong, NetworkObject> playerNObs;
     private Dictionary<ulong, PlayerScore> playerScores;
@@ -29,17 +29,10 @@ public class NetworkGameManager : NetworkBehaviour
 
     [Header("Audio")]
     [SerializeField] private UnityEvent CountdownAudio;
-
     public override void OnNetworkSpawn()
     {
-        // Get tracks from scene
-        splineWalkers = FindObjectsOfType<BezierWalker>();
-        if (splineWalkers.Length > 0)
-        {
-            ((BezierWalkerWithSpeed)splineWalkers[0]).spline = trackASegments[0];
-        }
-
         // Get connected players
+        Debug.Log(NetworkManager.Singleton.ConnectedClients.Count);
         for (int playerNum = 0; playerNum < NetworkManager.Singleton.ConnectedClients.Count; playerNum++)
         {
             NetworkObject player = NetworkManager.Singleton.ConnectedClients[0].PlayerObject;
