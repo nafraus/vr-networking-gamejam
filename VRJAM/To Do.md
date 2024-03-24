@@ -64,17 +64,17 @@ tags:
 		2. [ ] Volume sliders (music, sfx)
 		3. [ ] ==Red Light== Change handedness (swap options menu and gun)
 2. [>] Upgrading grub model implementation
-	1. [ ] Gun mod anchor transforms
+	1. [>] Gun mod anchor transforms ==YELLOW LIGHT==
 		1. [ ] Center of head (eyes, horns, ears, hats)
 		2. [ ] Base of head (root for body attachment point)
 		3. [ ] Front, back, top, and under side of body (additional body segments, pouch, head/tail, spine spikes)
 		4. [ ] Base of tail (root for body attachment point)
 		5. [ ] Between grub arms (carrying things)
-	3. [ ] Gun mod manager script
-		1. [ ] Uses scriptable objects for mods/upgrades
-			1. [ ] Enum for anchor location (CenterHead, BaseHead, FrontBody, BackBody, TopBody, UnderBody, BaseTail, CenterHands)
-			2. [ ] Bool for replace (false means additive)
-			3. [ ] Prefab (if applicable) 
+	3. [x] Gun mod manager script
+		1. [x] Uses scriptable objects for mods/upgrades
+			1. [x] Enum for anchor location (CenterHead, BaseHead, FrontBody, BackBody, TopBody, UnderBody, BaseTail, CenterHands)
+			2. [x] Bool for replace (false means additive)
+			3. [x] Prefab (if applicable) 
 				- tail upgrades for clip size will use sequential prefabs with each having one additional light than the last
 				- tail light system will need to be standalone and reference a gun script to determine how much ammo it has and modify its lights accordingly
 ### Day 3:

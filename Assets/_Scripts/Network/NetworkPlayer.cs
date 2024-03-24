@@ -16,8 +16,6 @@ public class NetworkPlayer : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-            
-        DontDestroyOnLoad(gameObject); // THIS COULD BE WRONG, IF SO TRY TO PUT IT IN THE IsOwner BLOCK
         
         if (IsOwner)
         {

@@ -1519,7 +1519,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 956517473}
         m_TargetAssemblyTypeName: NetworkConnect, Assembly-CSharp
-        m_MethodName: HostButtonPress
+        m_MethodName: Create
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1948,7 +1948,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1848810836}
         m_TargetAssemblyTypeName: NetworkConnect, Assembly-CSharp
-        m_MethodName: JoinButtonPress
+        m_MethodName: Join
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
