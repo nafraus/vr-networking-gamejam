@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ReduceTriggerSensitivity
   m_EditorClassIdentifier: 
   GunMods:
-  - modifierType: 0
+  - modifierType: 4
     IsReplacing: 0
     Value: 0.2
-  PointsCost: 0
+  PointsCost: 20
   AllowedUpgradeOccurances: 3

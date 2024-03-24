@@ -15,6 +15,6 @@ MonoBehaviour:
   GunMods:
   - modifierType: 5
     IsReplacing: 0
-    Value: 0.2
-  PointsCost: 0
+    Value: 0.25
+  PointsCost: 35
   AllowedUpgradeOccurances: 2

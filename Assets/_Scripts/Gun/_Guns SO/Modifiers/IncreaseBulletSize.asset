@@ -16,5 +16,5 @@ MonoBehaviour:
   - modifierType: 1
     IsReplacing: 0
     Value: 0.02
-  PointsCost: 0
+  PointsCost: 20
   AllowedUpgradeOccurances: 4
