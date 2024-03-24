@@ -8,12 +8,11 @@ public class NetworkTarget : NetworkBehaviour
     [ReadOnly] private PlayerScore playerScore;
 
     private BoxCollider bColl;
-    private MeshRenderer mr;
+    [SerializeField]private MeshRenderer mr;
 
     private void Start()
     {
         bColl = GetComponent<BoxCollider>();
-        mr = GetComponent<MeshRenderer>();
     }
 
     /// <summary>
