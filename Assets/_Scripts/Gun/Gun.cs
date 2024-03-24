@@ -32,9 +32,42 @@ public class Gun : MonoBehaviour
     private float timeSinceLastBurstShot;
     private bool hasAlreadyFired = false;
 
+
+    #region Properties
+    public float FireThreshold
+    {
+        get => gun.fireThreshhold - gun.GetModifierValueModifierType(ModifierType.ReduceTriggerThreshhold);
+    }
+    public float BurstSize
+    {
+        get => gun.burstSize + gun.GetModifierValueModifierType(ModifierType.AddBurstCount);
+    }
+    public float BurstRechamberTime
+    {
+        get => gun.burstRechamberTime - gun.GetModifierValueModifierType(ModifierType.ReduceBurstRechamberTime);
+    }
+    public float RaycastRadius
+    {
+        get => gun.raycastRadius + gun.GetModifierValueModifierType(ModifierType.IncreaseBulletRadius);
+    }
+    public float SpreadStrength
+    {
+        get => gun.spreadStrength - gun.GetModifierValueModifierType(ModifierType.ReduceSpreadValue);
+    }
+    public float ClipSize
+    {
+        get => gun.clipSize - gun.GetModifierValueModifierType(ModifierType.AddClipSize);
+    }
+    public float FireRateTime
+    {
+        get => gun.fireRateTime - gun.GetModifierValueModifierType(ModifierType.ReduceFireRate);
+    }
+
+    #endregion
+
     void Start()
     {
-        currentClipCount = gun.clipSize;
+        currentClipCount = (int) ClipSize;
     }
 
     // Update is called once per frame
@@ -42,7 +75,7 @@ public class Gun : MonoBehaviour
     {
         Debug.Log("CONNECTED: "+NetworkManager.Singleton.IsConnectedClient);
         timeSinceLastShot += Time.fixedDeltaTime;
-        bool actionHeld = fireReference.action.ReadValue<float>() > gun.fireThreshhold;
+        bool actionHeld = fireReference.action.ReadValue<float>() > FireThreshold;
 
         if (!actionHeld) hasAlreadyFired = false;
 
@@ -71,7 +104,7 @@ public class Gun : MonoBehaviour
             return false;
         }
 
-        if (timeSinceLastShot < gun.fireRateTime) return false;
+        if (timeSinceLastShot < FireRateTime) return false;
 
         return true;
     }
@@ -83,7 +116,7 @@ public class Gun : MonoBehaviour
         currentClipCount--;
 
         //Fire, single or burst shot
-        if (gun.burstSize == 1) FireOnce();
+        if (BurstSize == 1) FireOnce();
         else StartCoroutine(FireMultiple());
     }
 
@@ -96,8 +129,8 @@ public class Gun : MonoBehaviour
         if(gun.spreadStrength == 0) RaycastShot(transform.forward);
         else
         {
-            float randX = UnityEngine.Random.Range(-gun.spreadStrength, gun.spreadStrength);
-            float randY = UnityEngine.Random.Range(-gun.spreadStrength, gun.spreadStrength);
+            float randX = UnityEngine.Random.Range(-SpreadStrength, SpreadStrength);
+            float randY = UnityEngine.Random.Range(-SpreadStrength, SpreadStrength);
             Vector3 spread = transform.forward +
                 transform.right * randX +
                 transform.up * randY;
@@ -108,7 +141,7 @@ public class Gun : MonoBehaviour
     void RaycastShot(Vector3 direction)
     {
         RaycastHit hit;
-        Physics.SphereCast(shootingOrigin.position, gun.raycastRadius, direction, out hit);
+        Physics.SphereCast(shootingOrigin.position, RaycastRadius, direction, out hit);
 
         GameObject tracerOBJ = Instantiate(tracerPrefab);
         BulletTracer tracer = tracerOBJ.GetComponent<BulletTracer>();
@@ -117,7 +150,7 @@ public class Gun : MonoBehaviour
         if (hit.collider)
         {
             NetworkTarget target = hit.collider.GetComponent<NetworkTarget>();
-            tracer.Init(shootingOrigin.position, hit.point, gun.raycastRadius);
+            tracer.Init(shootingOrigin.position, hit.point, RaycastRadius);
             if (target)
             {
                 target.SetPlayerScore(playerScore);
@@ -126,7 +159,7 @@ public class Gun : MonoBehaviour
         }
         else
         {
-            tracer.Init(shootingOrigin.position, shootingOrigin.position + direction * 25, gun.raycastRadius);
+            tracer.Init(shootingOrigin.position, shootingOrigin.position + direction * 25, RaycastRadius);
         }
 
         //Last to make sure tracer is initialized
@@ -136,11 +169,11 @@ public class Gun : MonoBehaviour
     IEnumerator FireMultiple()
     {
         int bulletsFired = 0;
-        timeSinceLastBurstShot = gun.burstRechamberTime;
+        timeSinceLastBurstShot = BurstRechamberTime;
 
-        while (bulletsFired != gun.burstSize)
+        while (bulletsFired != BurstSize)
         {
-            if(timeSinceLastBurstShot >= gun.burstRechamberTime)
+            if(timeSinceLastBurstShot >= BurstRechamberTime)
             {
 
                 FireOnce();
@@ -174,7 +207,7 @@ public class Gun : MonoBehaviour
     IEnumerator ReloadLoop()
     {
         yield return new WaitForSeconds(gun.reloadTime);
-        currentClipCount = gun.clipSize;
+        currentClipCount = (int) ClipSize;
     }
     #endregion
 }
