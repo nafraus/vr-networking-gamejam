@@ -20,11 +20,12 @@ public class NetworkConnect : MonoBehaviour
     public UnityTransport transport;
     public string joinCode;
     private Lobby currentLobby;
+    /*
     [FormerlySerializedAs("inputField")] 
     public TMP_InputField inputField_TMP;
     [FormerlySerializedAs("hostJoinCode")] 
     public TMP_Text lobbyName_TMP;
-
+    */
     private float heartBeat;
     
     private async void Awake()
@@ -72,7 +73,7 @@ public class NetworkConnect : MonoBehaviour
         lobbyOptions.Data.Add("JOIN_CODE", dataObject);
         
         // Set the current lobby
-        currentLobby = await Lobbies.Instance.CreateLobbyAsync(inputField_TMP.text, 2, lobbyOptions);
+        currentLobby = await Lobbies.Instance.CreateLobbyAsync("LOBBY_NAME", 2, lobbyOptions); // ===================== 
         
         // Start the host
         NetworkManager.Singleton.StartHost();
