@@ -70,8 +70,8 @@ public class Gun : MonoBehaviour
 
     void Start()
     {
-        gunReferences.SetActiveGun(GunsSO.SetGunType.UI);
         gunReferences.SetCurrentGun(GunsSO.SetGunType.Default);
+        gunReferences.SetActiveGun(GunsSO.SetGunType.CurrentGameGun);
 
         currentClipCount = (int)ClipSize;
     }

@@ -1099,6 +1099,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1689058821 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1074142956360129684, guid: e82ec46a5cb28414ebac61888e272739, type: 3}
+  m_PrefabInstance: {fileID: 1939430210}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1689058824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689058821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3973605171
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1795988235
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,6 +1284,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4552591075466574562, guid: e82ec46a5cb28414ebac61888e272739, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 1074142956360129684, guid: e82ec46a5cb28414ebac61888e272739, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1689058824}
     - targetCorrespondingSourceObject: {fileID: 8580647079766130299, guid: e82ec46a5cb28414ebac61888e272739, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
