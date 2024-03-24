@@ -8,6 +8,7 @@ using System.Threading;
 using UnityEngine.XR.Interaction.Toolkit;
 using System;
 using Unity.Netcode;
+using Unity.Services.Relay;
 
 public class Gun : MonoBehaviour
 {
@@ -39,6 +40,7 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("CONNECTED: "+NetworkManager.Singleton.IsConnectedClient);
         timeSinceLastShot += Time.fixedDeltaTime;
         bool actionHeld = fireReference.action.ReadValue<float>() > gun.fireThreshhold;
 
@@ -60,19 +62,7 @@ public class Gun : MonoBehaviour
         }
     }
 
-    bool ActionCheck() 
-    {
-        return fireReference.action.ReadValue<float>() < gun.fireThreshhold;
-    }
-
-    IEnumerator UpdateLoop()
-    {
-        while (true)
-        {
-            yield return new WaitUntil(ActionCheck);
-        }
-    }
-
+    #region Firing Gun Behavior / Checks
     bool ValidateFire()
     {
         if (currentClipCount == 0)
@@ -140,7 +130,7 @@ public class Gun : MonoBehaviour
         }
 
         //Last to make sure tracer is initialized
-        tracer.NetworkObject.Spawn();
+        if(NetworkManager.Singleton.IsConnectedClient) tracer.NetworkObject.Spawn(false);
     }
 
     IEnumerator FireMultiple()
@@ -171,7 +161,9 @@ public class Gun : MonoBehaviour
         OnEmptyMagEvent.Invoke();
         interactor.SendHapticImpulse(0.05f, 0.1f);
     }
+    #endregion
 
+    #region Reload
     public void Reload()
     {
         OnReloadEvent.Invoke();
@@ -184,5 +176,6 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(gun.reloadTime);
         currentClipCount = gun.clipSize;
     }
+    #endregion
 }
 
