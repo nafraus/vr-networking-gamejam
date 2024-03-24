@@ -1,5 +1,6 @@
 
 using System;
+using BezierSolution;
 using UnityEngine;
 using Unity.Netcode;
 using Unity.Networking.Transport;
@@ -24,6 +25,12 @@ public class NetworkPlayer : NetworkBehaviour
             {
                 rend.enabled = false;
             }
+
+            // Set correct spline based on hosting or joining
+            BezierWalkerWithSpeed bwws = GetComponent<BezierWalkerWithSpeed>();
+            bwws.spline = IsHost ? 
+                FindObjectOfType<NetworkGameManager>().GetTrackAStart() : 
+                FindObjectOfType<NetworkGameManager>().GetTrackBStart();
         }
     }
 

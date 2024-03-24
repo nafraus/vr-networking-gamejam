@@ -61,7 +61,8 @@ public class NetworkGameManager : NetworkBehaviour
         }
 
         // Start game loop
-        StartCoroutine(nameof(StartGameLoop));
+        gameState = GameState.RideStart;
+        StartCoroutine(nameof(GameLoop));
     }
 
     private bool PlayersReady()
@@ -81,12 +82,6 @@ public class NetworkGameManager : NetworkBehaviour
 
         // This line is only reached when all players are ready
         return true;
-    }
-    
-    private IEnumerator StartGameLoop()
-    {
-        yield return new WaitUntil(() => NetworkManager.IsConnectedClient);
-        StartCoroutine(nameof(GameLoop));
     }
 
     private IEnumerator GameLoop()
@@ -153,5 +148,23 @@ public class NetworkGameManager : NetworkBehaviour
         {
             StartCoroutine(nameof(GameLoop));
         }
+    }
+
+    /// <summary>
+    /// Gets the starting segment for track A.
+    /// </summary>
+    /// <returns> The first BezierSpline in TracA. </returns>
+    public BezierSpline GetTrackAStart()
+    {
+        return trackASegments[0];
+    }
+    
+    /// <summary>
+    /// Gets the starting segment for track A.
+    /// </summary>
+    /// <returns> The first BezierSpline in TracA. </returns>
+    public BezierSpline GetTrackBStart()
+    {
+        return trackBSegments[0];
     }
 }
