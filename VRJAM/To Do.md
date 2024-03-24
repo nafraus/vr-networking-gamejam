@@ -23,7 +23,7 @@ tags:
 1. [x] Decide visual theme
 2. [x] Track layout
 ### Day 2:
-1. [ ] Create rider path using plugin
+1. [!] Create rider path using plugin
 ### Day 3:
 1. [ ] Decorate environment
 ## Programming
@@ -45,7 +45,7 @@ tags:
 	1. [x] Confirm despawn
 	2. [x] Confirm spawns from scene for both clients
 	3. [x] Confirm interaction with gun's raycast
-3. [ ] Make score system non-networked
+3. [>] Make score system non-networked
 	1. [x] Confirm score adding works
 	2. [?] Make each client's score reference available to the game manager
 	3. [>] Make each client's score reference available to the shop system?
@@ -63,7 +63,7 @@ tags:
 		1. [ ] Retire (quit, only if in a match)
 		2. [ ] Volume sliders (music, sfx)
 		3. [ ] ==Red Light== Change handedness (swap options menu and gun)
-2. [ ] Upgrading grub model implementation
+2. [>] Upgrading grub model implementation
 	1. [ ] Gun mod anchor transforms
 		1. [ ] Center of head (eyes, horns, ears, hats)
 		2. [ ] Base of head (root for body attachment point)
