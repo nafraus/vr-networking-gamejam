@@ -175,6 +175,7 @@ Transform:
   - {fileID: 6448323957888559825}
   - {fileID: 1894464733467742641}
   - {fileID: 5136521969642712538}
+  - {fileID: 1689321389130955123}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2679317225093199997
@@ -245,6 +246,68 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bwws: {fileID: 2139556678508919272}
+--- !u!1001 &678473354494368857
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2656208524903735575}
+    m_Modifications:
+    - target: {fileID: 2169546661102806314, guid: 6f2a07cf2875d574abfc246c678c4972, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2169546661102806314, guid: 6f2a07cf2875d574abfc246c678c4972, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2169546661102806314, guid: 6f2a07cf2875d574abfc246c678c4972, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2169546661102806314, guid: 6f2a07cf2875d574abfc246c678c4972, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2169546661102806314, guid: 6f2a07cf2875d574abfc246c678c4972, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2169546661102806314, guid: 6f2a07cf2875d574abfc246c678c4972, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2169546661102806314, guid: 6f2a07cf2875d574abfc246c678c4972, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2169546661102806314, guid: 6f2a07cf2875d574abfc246c678c4972, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2169546661102806314, guid: 6f2a07cf2875d574abfc246c678c4972, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2169546661102806314, guid: 6f2a07cf2875d574abfc246c678c4972, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701404332876974882, guid: 6f2a07cf2875d574abfc246c678c4972, type: 3}
+      propertyPath: m_Name
+      value: Music+RailSound
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6f2a07cf2875d574abfc246c678c4972, type: 3}
+--- !u!4 &1689321389130955123 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2169546661102806314, guid: 6f2a07cf2875d574abfc246c678c4972, type: 3}
+  m_PrefabInstance: {fileID: 678473354494368857}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1162112959907057608
 PrefabInstance:
   m_ObjectHideFlags: 0

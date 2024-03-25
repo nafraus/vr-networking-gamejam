@@ -49,70 +49,44 @@ public class NetworkGameManager : NetworkBehaviour
         // }
         
         // Stall player spline walkers
-        foreach (NetworkObject playerNOb in playerNObs.Values)
-        {
-            BezierWalkerStaller staller = playerNOb.GetComponent<BezierWalkerStaller>();
-            staller.SetStallPoint(0);
-            staller.DoStall = true;
-        }
+        // foreach (NetworkObject playerNOb in playerNObs.Values)
+        // {
+        //     BezierWalkerStaller staller = playerNOb.GetComponent<BezierWalkerStaller>();
+        //     staller.SetStallPoint(0);
+        //     staller.DoStall = true;
+        // }
 
         // Start game loop
+        StartCoroutine(nameof(StartRide));
         gameState = GameState.RideStart;
-        StartCoroutine(nameof(GameLoop));
     }
 
-    private bool PlayersReady()
-    {
-        // Short exit for not enough players
-        if (playerNObs.Count < 2) return false;
-        
-        // For each player
-        foreach (NetworkObject pNOb in playerNObs.Values)
-        {
-            // If not ready, return false
-            if (!pNOb.GetComponent<ReadyUpSystem>().Ready)
-            {
-                return false;
-            }
-        }
+    // == DON'T KNOW IF THIS IS GETTING USED ANYMORE ==
+    // private bool PlayersReady()
+    // {
+    //     // Short exit for not enough players
+    //     if (playerNObs.Count < 2) return false;
+    //     
+    //     // For each player
+    //     foreach (NetworkObject pNOb in playerNObs.Values)
+    //     {
+    //         // If not ready, return false
+    //         if (!pNOb.GetComponent<ReadyUpSystem>().Ready)
+    //         {
+    //             return false;
+    //         }
+    //     }
+    //
+    //     // This line is only reached when all players are ready
+    //     return true;
+    // }
 
-        // This line is only reached when all players are ready
-        return true;
-    }
-
-    private IEnumerator GameLoop()
+    private void Update()
     {
         switch (gameState)
         {
-            case GameState.RideStart:
-            {
-                // Wait for ready up from both players
-                if (NetworkManager.Singleton.ConnectedClients.Count == 2)
-                {
-                    // Do countdown launch sequence
-                    for (int i = 0; i < 3; i++)
-                    {
-                        yield return new WaitForSeconds(1);
-
-                        // Play audio clip
-                        CountdownAudio?.Invoke();
-                    }
-
-                    // Start both player's rides
-                    foreach(BezierWalker walker in splineWalkers)
-                    {
-                        BezierWalkerStaller staller = walker.GetComponent<BezierWalkerStaller>();
-                        staller.DoStall = false;
-                    }
-
-                    // Change gameState
-                    gameState = GameState.Dueling;
-                }
-                
-                Debug.Log("RIDE START");
-                break;
-            }
-
+            default: break;
+            
             case GameState.Dueling:
             {
                 // If at last spline segment of track
@@ -129,21 +103,35 @@ public class NetworkGameManager : NetworkBehaviour
                 //Debug.Log("DUELING");
                 break;
             }
-
-            case GameState.RideEnd:
-            {
-                // Enable UI to allow player to quit game and return to lobby is done outside this script 
-                
-                Debug.Log("RIDE END");
-                break;
-            }
         }
+    }
 
-        // If ride is not over, call next game loop
-        if (gameState != GameState.RideEnd)
+    public void StartRide()
+    {
+        // Wait for ready up from both players
+        if (true)//(NetworkManager.Singleton.ConnectedClients.Count == 2)
         {
-            StartCoroutine(nameof(GameLoop));
+            // Do countdown launch sequence
+            // for (int i = 0; i < 3; i++)
+            // {
+            //     yield return new WaitForSeconds(1);
+            //
+            //     // Play audio clip
+            //     CountdownAudio?.Invoke();
+            // }
+
+            // Start both player's rides
+            foreach(BezierWalker walker in splineWalkers)
+            {
+                BezierWalkerStaller staller = walker.GetComponent<BezierWalkerStaller>();
+                staller.DoStall = false;
+            }
+
+            // Change gameState
+            gameState = GameState.Dueling;
         }
+                
+        Debug.Log("RIDE START");
     }
 
     /// <summary>
